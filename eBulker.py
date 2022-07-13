@@ -1,7 +1,7 @@
 #Prerequisites:
-#The body of you email 
-#
-#
+#The body of your email in a txt file
+#The contacts to send the email to as a csv file with name and toaddr fields
+#An attachment - You may need to change the MIMEBase maintype
 
 #Import dependencies
 import smtplib 
@@ -12,9 +12,9 @@ from email.mime.text import MIMEText
 from email import encoders
 
 #Declare variables
-fromaddr = 'EMAILADDRESS'
-pword = 'EMAILPASSWORD'
-filename = 'PATH/TO/ATTACHMENT/FILENAME'
+fromaddr = 'EMAIL'
+pword = 'PASSWORD'
+filename = 'PATH/TO/ATTACHMENT'
 contactsPath = 'PATH/TO/CONTACTS.csv'
 emailBodyPath = 'PATH/TO/EMAIL/BODY.txt'
 
