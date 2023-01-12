@@ -20,21 +20,20 @@ parser = argparse.ArgumentParser(description='Send bulk emails')
 parser.add_argument('-a', '--attach', help='Filepath of the attachment')
 parser.add_argument('-c', '--contacts', required=True, help='Filepath to Contacts.csv file')
 parser.add_argument('-b', '--body', required=True, help='Filepath to email body.txt')
+parser.add_argument('-s', '--subject', required=True, help='The subject of the email')
 
-
-
-
-# ------------------------------------------------
+# Extract arguments into variable
+args = parser.parse_args()
 
 #Declare variables
-fromaddr = 'EMAIL'
-pword = 'PASSWORD'
-filename = 'PATH/TO/ATTACHMENT'
-contactsPath = 'PATH/TO/CONTACTS.csv'
-emailBodyPath = 'PATH/TO/EMAIL/BODY.txt'
+fromaddr = 'EMAIL' # CHANGE THIS
+pword = 'PASSWORD' # CHANGE THIS
+filename = args.attach
+contactsPath = args.contacts
+emailBodyPath = args.body
 
 #Create server connection
-server = smtplib.SMTP('smtp.office365.com', 587)
+server = smtplib.SMTP('smtp.office365.com', 587) # CHANGE THIS
 server.ehlo()
 server.starttls()
 server.login(fromaddr, pword)
@@ -65,7 +64,7 @@ with open(contactsPath) as contacts:
         for name, toaddr in reader:
             msg = MIMEMultipart()
             msg['From'] = fromaddr
-            msg['Subject'] = 'Multi Factor Authentication'
+            msg['Subject'] = args.subject
             body = f'Dear {name}, \n' + tempBody
             msg.attach(part)
             msg.attach(MIMEText(body, 'plain'))
