@@ -12,13 +12,13 @@ from email.mime.text import MIMEText
 from email import encoders
 
 import argparse
+import os
 
 #Initialise parser
 parser = argparse.ArgumentParser(description='Send bulk emails')
 
 #Add arguments
 parser.add_argument('-a', '--attach', help='Filepath of the attachment')
-parser.add_argument('-fn', '--filename', default='Attachment', help='Enter the attachment name')
 parser.add_argument('-c', '--contacts', required=True, help='Filepath to Contacts.csv file')
 parser.add_argument('-b', '--body', required=True, help='Filepath to email body.txt')
 parser.add_argument('-s', '--subject', required=True, help='The subject of the email')
@@ -54,7 +54,7 @@ with open(contactsPath) as contacts:
     encoders.encode_base64(part)
     part.add_header(
     "Content-Disposition",
-    f"attachment; filename= {filename}")
+    f"attachment; filename= {os.path.basename(filename)}")
 
     #personalise the body of the email
     with open(emailBodyPath) as content:
