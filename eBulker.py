@@ -11,6 +11,20 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 
+import argparse
+
+#Initialise parser
+parser = argparse.ArgumentParser(description='Send bulk emails')
+
+#Add arguments
+parser.add_argument('-a', '--attach', help='Enter the filepath of the attachment')
+
+
+
+
+
+# ------------------------------------------------
+
 #Declare variables
 fromaddr = 'EMAIL'
 pword = 'PASSWORD'
