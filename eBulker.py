@@ -6,11 +6,14 @@
 #Import dependencies
 import smtplib 
 import csv
-import tkinter as win;
+import tkinter as win
+from tkinter import ttk, filedialog
+from tkinter.filedialog import askopenfile
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
+import os
 
 #Create the GUI
 root = win.Tk()
@@ -39,11 +42,28 @@ def login():
     server.starttls()
     server.login(fromaddr, pword)
     labelSuccess = win.Label(root, text='Login success!', font=('serif', 14), bg= '#646262', fg='white')
-    canvas.create_window(200, 230, window = labelSuccess)
+    canvas.create_window(230, 200, window = labelSuccess)
     buttonLogin.config(state='disabled')
     
 buttonLogin = win.Button(root,text = 'Login', font=('serif',12),command=login)
 canvas.create_window(200, 200, window= buttonLogin)
+
+labelContacts = win.Label(root, text="Select the contacts to send to (.csv):", font=('serif', 12), bg='#646262', fg='white')
+canvas.create_window(130, 240, window = labelContacts)
+def open_contacts():
+    contacts = filedialog.askopenfile(mode='r', filetypes=[('Comma Separated Values Files','*.csv')])
+    if contacts:
+        filename = contacts.name
+        filename= os.path.basename(filename)
+        content = contacts.readlines()
+        labelCSV = win.Label(root, text= filename, font=('serif', 14),bg='#646262', fg='white')
+        canvas.create_window(150, 310, window =labelCSV)
+        labelCSVLength = win.Label(root, text= 'There are: ' + str(len(content)) + ' contacts in ' + filename, font=('serif', 14),bg='#646262', fg='white', wraplength=500)
+        canvas.create_window(200, 340, window =labelCSVLength)
+
+buttonContacts = win.Button(root, text="Browse", command=open_contacts)
+canvas.create_window(150,280,window=buttonContacts)
+
 
 # #Declare variables
 # fromaddr = 'EMAIL'
@@ -86,5 +106,5 @@ canvas.create_window(200, 200, window= buttonLogin)
 #             msg.attach(MIMEText(body, 'plain'))
 #             server.sendmail(fromaddr, toaddr, msg.as_string())
 
-# server.quit()
+#server.quit()
 root.mainloop()
