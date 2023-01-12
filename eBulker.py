@@ -17,8 +17,9 @@ import argparse
 parser = argparse.ArgumentParser(description='Send bulk emails')
 
 #Add arguments
-parser.add_argument('-a', '--attach', help='Enter the filepath of the attachment')
-
+parser.add_argument('-a', '--attach', help='Filepath of the attachment')
+parser.add_argument('-c', '--contacts', required=True, help='Filepath to Contacts.csv file')
+parser.add_argument('-b', '--body', required=True, help='Filepath to email body.txt')
 
 
 
