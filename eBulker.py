@@ -26,8 +26,8 @@ parser.add_argument('-s', '--subject', required=True, help='The subject of the e
 args = parser.parse_args()
 
 #Declare variables
-fromaddr = 'EMAIL' # CHANGE THIS
-pword = 'PASSWORD' # CHANGE THIS
+fromaddr = 'EMAIL' # CHANGE THIS TO YOUR EMAIL
+pword = 'PASSWORD' # CHANGE THIS TO YOUR EMAIL PASSWORD
 filename = args.attach
 contactsPath = args.contacts
 emailBodyPath = args.body
