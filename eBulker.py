@@ -58,7 +58,7 @@ def open_contacts():
         content = contacts.readlines()
         labelCSV = win.Label(root, text= filename, font=('serif', 14),bg='#646262', fg='white')
         canvas.create_window(150, 310, window =labelCSV)
-        labelCSVLength = win.Label(root, text= 'There are: ' + str(len(content)) + ' contacts in ' + filename, font=('serif', 14),bg='#646262', fg='white', wraplength=500)
+        labelCSVLength = win.Label(root, text= 'There are: ' + str(len(content)-1) + ' contacts in ' + filename, font=('serif', 14),bg='#646262', fg='white', wraplength=500)
         canvas.create_window(200, 340, window =labelCSVLength)
 
 buttonContacts = win.Button(root, text="Browse", command=open_contacts)
