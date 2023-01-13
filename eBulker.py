@@ -33,14 +33,18 @@ canvas.create_window(100, 130, window=labelPword)
 pwordString = win.Entry(root,width= 50, border = 2, show='*')
 canvas.create_window(160,150, window=pwordString)
 
+#Function called when Login button is pressed
 def login():
+    #Gets the strings entered in the text boxes and assigns them to variables
     fromaddr = frommAddrString.get()
     pword = pwordString.get()
-    # #Create server connection
+    #Create server connection
     server = smtplib.SMTP('smtp.office365.com', 587)
     server.ehlo()
     server.starttls()
+    #Tries to authenticate the SMTP using the login details provided
     server.login(fromaddr, pword)
+    #If successful then display a label stating the outcome
     labelSuccess = win.Label(root, text='Login success!', font=('serif', 14), bg= '#646262', fg='white')
     canvas.create_window(230, 200, window = labelSuccess)
     buttonLogin.config(state='disabled')
@@ -48,9 +52,12 @@ def login():
 buttonLogin = win.Button(root,text = 'Login', font=('serif',12),command=login)
 canvas.create_window(200, 200, window= buttonLogin)
 
+#Ask the user to import a CSV file of the contacts
 labelContacts = win.Label(root, text="Select the contacts to send to (.csv):", font=('serif', 12), bg='#646262', fg='white')
 canvas.create_window(130, 240, window = labelContacts)
+#Function to open and read the contacts
 def open_contacts():
+    #Opens the file explorer to allow the user to select the file they want
     contacts = filedialog.askopenfile(mode='r', filetypes=[('Comma Separated Values Files','*.csv')])
     if contacts:
         filename = contacts.name
@@ -63,6 +70,8 @@ def open_contacts():
 
 buttonContacts = win.Button(root, text="Browse", command=open_contacts)
 canvas.create_window(150,280,window=buttonContacts)
+
+
 
 
 # #Declare variables
