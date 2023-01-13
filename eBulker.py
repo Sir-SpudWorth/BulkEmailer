@@ -14,7 +14,9 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 import os
+#loop = True
 
+#while  loop ==True:
 #Create the GUI
 root = win.Tk()
 root.title('Create Bulk Email')
@@ -49,8 +51,15 @@ def login():
     canvas.create_window(230, 200, window = labelSuccess)
     buttonLogin.config(state='disabled')
     
-buttonLogin = win.Button(root,text = 'Login', font=('serif',12),command=login)
+    #labelFailed = win.Label(root, text='Login failed!', font=('serif', 14), bg= '#646262', fg='white')
+    #canvas.create_window(230, 200, window = labelFailed)
+    #loop = False
+    
+buttonLogin = win.Button(root,text = 'Login', font=('serif',12),command=login,)
 canvas.create_window(200, 200, window= buttonLogin)
+
+
+    
 
 #Ask the user to import a CSV file of the contacts
 labelContacts = win.Label(root, text="Select the contacts to send to (.csv):", font=('serif', 12), bg='#646262', fg='white')
@@ -65,7 +74,7 @@ def open_contacts():
         content = contacts.readlines()
         labelCSV = win.Label(root, text= filename, font=('serif', 14),bg='#646262', fg='white')
         canvas.create_window(150, 310, window =labelCSV)
-        labelCSVLength = win.Label(root, text= 'There are: ' + str(len(content)-1) + ' contacts in ' + filename, font=('serif', 14),bg='#646262', fg='white', wraplength=500)
+        labelCSVLength = win.Label(root, text= 'There are: ' + str(len(content)) + ' contacts in ' + filename, font=('serif', 14),bg='#646262', fg='white', wraplength=500)
         canvas.create_window(200, 340, window =labelCSVLength)
 
 buttonContacts = win.Button(root, text="Browse", command=open_contacts)
@@ -74,46 +83,46 @@ canvas.create_window(150,280,window=buttonContacts)
 
 
 
-# #Declare variables
-# fromaddr = 'EMAIL'
-# pword = 'PASSWORD'
-# filename = 'PATH/TO/ATTACHMENT'
-# contactsPath = 'PATH/TO/CONTACTS.csv'
-# emailBodyPath = 'PATH/TO/EMAIL/BODY.txt'
+    # #Declare variables
+    # fromaddr = 'EMAIL'
+    # pword = 'PASSWORD'
+    # filename = 'PATH/TO/ATTACHMENT'
+    # contactsPath = 'PATH/TO/CONTACTS.csv'
+    # emailBodyPath = 'PATH/TO/EMAIL/BODY.txt'
 
 
 
-# #read the csv file line by line
-# with open(contactsPath) as contacts:
-#     reader = csv.reader(contacts)
-#     next(reader)
+    # #read the csv file line by line
+    # with open(contactsPath) as contacts:
+    #     reader = csv.reader(contacts)
+    #     next(reader)
 
-#     #create a 'part' of the email containing an attachment
-#     with open(filename, 'rb') as file:
-#         part = MIMEBase("application", "octet-stream")
-#         part.set_payload(file.read())
-#         file.close()
+    #     #create a 'part' of the email containing an attachment
+    #     with open(filename, 'rb') as file:
+    #         part = MIMEBase("application", "octet-stream")
+    #         part.set_payload(file.read())
+    #         file.close()
 
-#     #encode and add headers for the email to be sent
-#     encoders.encode_base64(part)
-#     part.add_header(
-#     "Content-Disposition",
-#     f"attachment; filename= {filename}")
+    #     #encode and add headers for the email to be sent
+    #     encoders.encode_base64(part)
+    #     part.add_header(
+    #     "Content-Disposition",
+    #     f"attachment; filename= {filename}")
 
-#     #personalise the body of the email
-#     with open(emailBodyPath) as content:
-#         tempBody = content.read()
-#         content.close()
+    #     #personalise the body of the email
+    #     with open(emailBodyPath) as content:
+    #         tempBody = content.read()
+    #         content.close()
 
-#         #for every name and address in the csv file craft a new email with personalised body and same attachment as above
-#         for name, toaddr in reader:
-#             msg = MIMEMultipart()
-#             msg['From'] = fromaddr
-#             msg['Subject'] = 'Multi Factor Authentication'
-#             body = f'Dear {name}, \n' + tempBody
-#             msg.attach(part)
-#             msg.attach(MIMEText(body, 'plain'))
-#             server.sendmail(fromaddr, toaddr, msg.as_string())
+    #         #for every name and address in the csv file craft a new email with personalised body and same attachment as above
+    #         for name, toaddr in reader:
+    #             msg = MIMEMultipart()
+    #             msg['From'] = fromaddr
+    #             msg['Subject'] = 'Multi Factor Authentication'
+    #             body = f'Dear {name}, \n' + tempBody
+    #             msg.attach(part)
+    #             msg.attach(MIMEText(body, 'plain'))
+    #             server.sendmail(fromaddr, toaddr, msg.as_string())
 
-#server.quit()
+    #server.quit()
 root.mainloop()
