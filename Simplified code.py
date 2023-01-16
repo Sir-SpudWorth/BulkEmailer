@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from email import encoders
 import os
 import ctypes
+
 user32 = ctypes.windll.user32
 screensizex = user32.GetSystemMetrics(0)
 screensizey = user32.GetSystemMetrics(1)
@@ -49,6 +50,7 @@ def login():
 
 emailButton = Button(window, text = "Login", command=login, font=("serif", 14)).grid(row = 2, column=0)
 
+contactsVar = StringVar()
 contacts = Label(window, text= "Select the contacts you wish to send to (.CSV):", font=("serif", 14)).grid(row=4, column = 0)
 
 def open_contacts():
@@ -57,8 +59,17 @@ def open_contacts():
     if contacts:
         filename = contacts.name
         filename= os.path.basename(filename)
-        content = contacts.readlines()
         fileChosen = Label(window,text= "'" + filename + "'", font=("serif",14)).grid(row=5,column = 0)
+        
+        """ def view_contacts():
+            new = Toplevel(window)
+            new.geometry("300x500")
+            new.title(filename)
+            with open(filename,newline=''):
+                reader = csv.reader(contacts)
+                for line in reader:
+                    contactsLabel = Label(new, textvariable=contactsVar,font=("serif",12), text="").grid(row=0,column=0, padx= 5, pady=3)
+        viewButton = Button(window, text="View Contacts", font=("serif",14), command=view_contacts()).grid(row=5,column=1) """
         
 contactsButton = Button(window,text = "Browse", command=open_contacts, font=("serif", 14)).grid(row=4,column=1)
 
